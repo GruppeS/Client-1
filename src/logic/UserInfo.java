@@ -8,7 +8,7 @@ public class UserInfo implements java.io.Serializable
 	private String password;
 	private boolean isAdmin;
 
-	//Getters and setters for everything, bitch
+	//Getters and setters for everything
 	public String getOverallID() {
 		return overallID;
 	}
