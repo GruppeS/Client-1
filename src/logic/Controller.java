@@ -20,24 +20,22 @@ public class Controller {
 	private Screen screen;
 	private ServerConnection serverConnection;
 
-	public void userInfoGet() throws UnknownHostException, IOException{
+	public Controller() {
 		
+		screen = new Screen();
+		screen.getLoginPanel().addActionListener(new LoginPanelActionListener());
+		serverConnection = new ServerConnection();
 		gson = new GsonBuilder().create();
 		userInfo = new UserInfo();
-		screen = new Screen();
-		serverConnection = new ServerConnection();
-		
-				
-				userInfo.setAuthUserEmail(email);
-				userInfo.setAuthUserPassword(password);
-				userInfo.setAuthUserIsAdmin(false);
-				String gsonString = gson.toJson(userInfo);
-				String info = serverConnection.getFromServer(gsonString);
-		 if(info.equals("0")){
-			 
-		 }
 	}
-
+	
+	public void run(){
+		
+		screen.show(Screen.LOGINPANEL);
+		screen.setVisible(true);
+		
+	}
+	
 	private class LoginPanelActionListener implements ActionListener // Klasse der implementere actionlistener
 	{
 		public void actionPerformed(ActionEvent e) // metode der bliver kørt når en knap trykkes i login panelet
@@ -48,16 +46,26 @@ public class Controller {
 			{				
 				email = screen.getLoginPanel().getUserName_Login(); 
 				password = screen.getLoginPanel().getPassword_Login();
+				userInfo.setAuthUserEmail(email);
+				userInfo.setAuthUserPassword(password);
+				userInfo.setAuthUserIsAdmin(false);
+				String gsonString = gson.toJson(userInfo);
+				String info = null;
 				try {
-					userInfoGet();
+					info = serverConnection.getFromServer(gsonString);
 				} catch (UnknownHostException e1) {
-				
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+		 if(info.equals("0")){
+			 
+		 }
+		 else{
+			 System.out.println("succes");
+		 }
 				
 			} // if sætning slutter
 		} // Metode slutter
