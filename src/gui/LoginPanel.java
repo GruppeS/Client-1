@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class LoginPanel extends JPanel // LoginPanel klasse der extender JPanel
 { 
@@ -38,7 +39,7 @@ public class LoginPanel extends JPanel // LoginPanel klasse der extender JPanel
 		setLayout(null); // absolut layout
 
 		// JLabels
-		lblNewLabel = new JLabel("Welcome to Bitcoin@CBS"); // Opret label og sæt tekst
+		lblNewLabel = new JLabel("Welcome to Calendar");
 		lblNewLabel.setBounds(60, 98, 194, 24); // Størrelse og placering
 		lblNewLabel.setFont(new Font("Calibri", Font.PLAIN, 19)); // Tekst formattering
 		add(lblNewLabel); // Tilføj til panel
