@@ -59,9 +59,13 @@ public class Controller {
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 		 if(info.equals("0")){
-			 
+			 screen.show(Screen.MAINPANEL);
+		
 		 }
 		 else{
 			 System.out.println("succes");

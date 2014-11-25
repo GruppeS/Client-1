@@ -13,7 +13,7 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 	private static final long serialVersionUID = 1L; // id for screen
 	
 	//final static strenge til at kalde de korresponderende paneler
-	public static final String ADMINADD = "1";
+	public static final String MAINPANEL = "1";
 	public static final String ADMINEDIT = "2";
 	public static final String ADMINPANEL = "3";
 	public static final String LOGINPANEL = "4";
@@ -27,6 +27,7 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 	// variable til at holde på objekter af JPanel
 	private JPanel contentPane;
 	private LoginPanel loginPanel;
+	private MainPanel mainPanel;
 	
 	
 	CardLayout c; //variabel til at holde på cardlayout
@@ -48,6 +49,9 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 
 		loginPanel = new LoginPanel();
 		contentPane.add(loginPanel, LOGINPANEL);
+		
+		mainPanel = new MainPanel();
+		contentPane.add(mainPanel, MAINPANEL);
 
 		c = (CardLayout) getContentPane().getLayout(); // cardlayoutet sættes til kunne bestå af de forskellige contentpanes
 	} // konstruktør slutter
@@ -61,7 +65,10 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 	public LoginPanel getLoginPanel() {
 		return loginPanel; // returnerer loginPanel
 	}
-
+	
+	public MainPanel getMainPanel(){ 
+		return mainPanel;
+	}
 	/**
 	 * @param card
 	 */

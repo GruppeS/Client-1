@@ -3,17 +3,11 @@ package gui; // En del af ui
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 public class LoginPanel extends JPanel // LoginPanel klasse der extender JPanel
 { 
@@ -85,15 +79,7 @@ public class LoginPanel extends JPanel // LoginPanel klasse der extender JPanel
 
 	} // Konstruktør slutter
 
-	/**
-	 * adds actionlisteners and actioncommands for button
-	 * @param l
-	 */
-	public void addActionListener(ActionListener l) // metode til at tilføje actionlisteners og actioncommands til knapper
-	{
-		btnLogin.addActionListener(l); // tilføjer actionlistener
-		btnLogin.setActionCommand("LoginBtn"); // tilføjer actioncommand
-	} // metode slutter
+
 	// metode til at vise label
 	public void incorrect()
 	{
@@ -126,4 +112,15 @@ public class LoginPanel extends JPanel // LoginPanel klasse der extender JPanel
 		// fjerner tekst i textfields
 		password_Login.setText("");
 	}
+	/**
+	 * adds actionlisteners and actioncommands for button
+	 * @param l
+	 */
+	public void addActionListener(ActionListener l) // metode til at tilføje actionlisteners og actioncommands til knapper
+	{
+		btnLogin.addActionListener(l); // tilføjer actionlistener
+		btnLogin.setActionCommand("LoginBtn"); // tilføjer actioncommand
+	} // metode slutter
+
+	
 }
