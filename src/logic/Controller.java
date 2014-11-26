@@ -67,8 +67,8 @@ public class Controller {
 			 screen.show(Screen.MAINPANEL);
 		
 		 }
-		 else{
-			 System.out.println("succes");
+		 else if (!info.equals("0")){
+			 screen.getLoginPanel().incorrect();
 		 }
 				
 			} // if sætning slutter
