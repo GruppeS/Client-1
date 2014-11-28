@@ -17,6 +17,7 @@ public class Controller {
 	private String password;
 	private Gson gson;
 	private UserInfo userInfo;
+	private QOTD qOTD;
 	private Screen screen;
 	private ServerConnection serverConnection;
 
@@ -24,9 +25,12 @@ public class Controller {
 		
 		screen = new Screen();
 		screen.getLoginPanel().addActionListener(new LoginPanelActionListener());
+		screen.getMainPanel().addActionListener(new MainPanelActionListener());
 		serverConnection = new ServerConnection();
 		gson = new GsonBuilder().create();
 		userInfo = new UserInfo();
+		qOTD = new QOTD();
+		
 	}
 	
 	public void run(){
@@ -48,7 +52,6 @@ public class Controller {
 				password = screen.getLoginPanel().getPassword_Login();
 				userInfo.setAuthUserEmail(email);
 				userInfo.setAuthUserPassword(password);
-				userInfo.setAuthUserIsAdmin(false);
 				String gsonString = gson.toJson(userInfo);
 				String info = null;
 				try {
@@ -71,8 +74,34 @@ public class Controller {
 			 screen.getLoginPanel().incorrect();
 		 }
 				
-			} // if sætning slutter
-		} // Metode slutter
-	} // Klasse slutter
+			} 
+		} 
+	}
 	
+		private class MainPanelActionListener implements ActionListener // Klasse der implementere actionlistener
+		{
+			public void actionPerformed(ActionEvent e) // metode der bliver kørt når en knap trykkes i login panelet
+			{
+				String cmd = e.getActionCommand(); // lokal string der gemmer actioncommand
+				if(cmd.equals("btnQotd")){
+					String gsonString = gson.toJson(qOTD);
+					String qoute = null;
+					try {
+					qoute = serverConnection.getFromServer(gsonString);
+					System.out.println(qoute);
+					}
+				 catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+					}
+			} 
+		}
 }
+

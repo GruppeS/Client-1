@@ -14,15 +14,10 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 	
 	//final static strenge til at kalde de korresponderende paneler
 	public static final String MAINPANEL = "1";
-	public static final String ADMINEDIT = "2";
-	public static final String ADMINPANEL = "3";
-	public static final String LOGINPANEL = "4";
-	public static final String USERDEPOSIT = "5";
-	public static final String USERPANEL = "6";
-	public static final String USERPAY = "7";
-	public static final String USERTRANSFER = "8";
-	public static final String USERWITHDRAW = "9";
-	public static final String RECIPIENTPANEL = "10";
+	public static final String LOGINPANEL = "2";
+	public static final String USERDEPOSIT = "3";
+	public static final String USERPANEL = "4";
+	public static final String USERPAY = "5";
 
 	// variable til at holde på objekter af JPanel
 	private JPanel contentPane;
