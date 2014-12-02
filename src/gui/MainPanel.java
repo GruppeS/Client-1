@@ -15,31 +15,36 @@ public class MainPanel extends JPanel {
 	private JButton btnWeather;
 	private JLabel lblMainMenu;
 	private JTextArea textArea;
+	private JButton btnLogout;
 	
 	public MainPanel() {
 		setLayout(null);
 		
 		lblMainMenu = new JLabel("Main menu");
-		lblMainMenu.setBounds(85, 11, 127, 35);
+		lblMainMenu.setBounds(163, 11, 127, 35);
 		add(lblMainMenu);
 		
 		btnViewCalendar = new JButton("View calendar");
-		btnViewCalendar.setBounds(10, 63, 127, 59);
+		btnViewCalendar.setBounds(163, 330, 127, 59);
 		add(btnViewCalendar);
 		
 		btnQotd = new JButton("QOTD");
-		btnQotd.setBounds(85, 133, 127, 59);
+		btnQotd.setBounds(163, 57, 127, 59);
 		add(btnQotd);
 		
 		btnWeather = new JButton("Weather");
-		btnWeather.setBounds(163, 63, 127, 59);
+		btnWeather.setBounds(10, 330, 127, 59);
 		add(btnWeather);
 		
 		textArea = new JTextArea();
-		textArea.setBounds(25, 220, 245, 169);
+		textArea.setBounds(105, 125, 245, 169);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		add(textArea);
+		
+		btnLogout = new JButton("Logout");
+		btnLogout.setBounds(313, 330, 127, 59);
+		add(btnLogout);
 	}
 	public void addActionListener(ActionListener l) // metode til at tilføje actionlisteners og actioncommands til knapper
 	{
@@ -49,10 +54,16 @@ public class MainPanel extends JPanel {
 		btnQotd.setActionCommand("btnQotd"); // tilføjer actioncommand
 		btnWeather.addActionListener(l); // tilføjer actionlistener
 		btnWeather.setActionCommand("btnWeather"); // tilføjer actioncommand
+		btnLogout.addActionListener(l); // tilføjer actionlistener
+		btnLogout.setActionCommand("btnLogout"); // tilføjer actioncommand
 		
 	} // metode slutter
 	
 	public void setQoute(String qoute){
 		textArea.setText(qoute);
+	}
+	
+	public void reset(){
+		textArea.setText("");
 	}
 }

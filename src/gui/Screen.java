@@ -35,7 +35,7 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 	{
 		setTitle("DoekCalendar"); // titel på vindue
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Programmet lukkes ned når vinduet lukkes
-		setBounds(100, 100, 336, 519); // størrelsen på vinduet
+		setBounds(100, 100, 460, 519); // størrelsen på vinduet
 		contentPane = new JPanel(); // der oprettes et tomt panel
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0)); // størrelsen på vinduet
 		setContentPane(contentPane); // det tomme panel sættes i vinduet

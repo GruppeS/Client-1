@@ -115,24 +115,40 @@ public class Controller {
 				}
 
 			}
+
+			else if (cmd.equals("btnLogout")){
+				
+				try {
+					screen.getMainPanel().reset();
+					screen.getLoginPanel().reset();
+					serverConnection.close();
+					screen.show(screen.LOGINPANEL);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+			}
+
 			else if(cmd.equals("btnWeather")) {
 				String gsonString = gson.toJson(forecasts);
 				String weather = null;
 				try {
-					 weather = serverConnection.getFromServer(gsonString);
-					 forecasts = gson.fromJson(weather, Forecasts.class);
-					 
-					 Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-						
-						for(int i = 0; i<7; i++) {
-							Vector<Object> row = new Vector<Object>();
-							row.addElement(forecasts.getForecasts().get(i).getDate().substring(0,10));
-							row.addElement(forecasts.getForecasts().get(i).getCelsius());
-							row.addElement(forecasts.getForecasts().get(i).getDesc());
-							data.addElement(row);
-						}
+					weather = serverConnection.getFromServer(gsonString);
+					forecasts = gson.fromJson(weather, Forecasts.class);
+
+					Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+
+					for(int i = 0; i<7; i++) {
+						Vector<Object> row = new Vector<Object>();
+						row.addElement(forecasts.getForecasts().get(i).getDate().substring(0,10));
+						row.addElement(forecasts.getForecasts().get(i).getCelsius());
+						row.addElement(forecasts.getForecasts().get(i).getDesc());
+						data.addElement(row);
+					}
 					screen.getForecastPanel().createTable(data);
-						
+
 				} catch (UnknownHostException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -153,11 +169,11 @@ public class Controller {
 		public void actionPerformed(ActionEvent e)
 		{
 			String cmd = e.getActionCommand();
-			
-			if (cmd.equals("btnWeather")) {
+
+			if (cmd.equals("btnBackToMain")) {
 				screen.show(screen.MAINPANEL);
 			}
-			
+
 		}
 	} 
 }

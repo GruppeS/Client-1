@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.ActionEvent;
 
 public class ForecastPanel extends JPanel {
 	
@@ -21,11 +22,15 @@ public class ForecastPanel extends JPanel {
 		setLayout(null);
 		
 		btnBackToMain = new JButton("Back to main");
-		btnBackToMain.setBounds(176, 266, 93, 23);
+		btnBackToMain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnBackToMain.setBounds(10, 266, 124, 23);
 		add(btnBackToMain);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 430, 244);
+		scrollPane.setBounds(10, 11, 430, 177);
 		add(scrollPane);
 	}
 	

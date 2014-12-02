@@ -34,27 +34,27 @@ public class LoginPanel extends JPanel // LoginPanel klasse der extender JPanel
 
 		// JLabels
 		lblNewLabel = new JLabel("Welcome to Calendar");
-		lblNewLabel.setBounds(60, 98, 194, 24); // Størrelse og placering
+		lblNewLabel.setBounds(118, 97, 194, 24); // Størrelse og placering
 		lblNewLabel.setFont(new Font("Calibri", Font.PLAIN, 19)); // Tekst formattering
 		add(lblNewLabel); // Tilføj til panel
 
 		lblPleaseLoginBelow = new JLabel("Please login below:");
-		lblPleaseLoginBelow.setBounds(99, 145, 108, 16);
+		lblPleaseLoginBelow.setBounds(155, 145, 108, 16);
 		lblPleaseLoginBelow.setFont(new Font("Calibri", Font.PLAIN, 12));
 		add(lblPleaseLoginBelow);
 
 		lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(83, 197, 52, 14);
+		lblUsername.setBounds(124, 199, 52, 14);
 		lblUsername.setFont(new Font("Calibri", Font.PLAIN, 11));
 		add(lblUsername);
 
 		lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(86, 252, 49, 14);
+		lblPassword.setBounds(127, 254, 49, 14);
 		lblPassword.setFont(new Font("Calibri", Font.PLAIN, 11));
 		add(lblPassword);
 		
-		lblIncorrect = new JLabel("Username or password is incorrect");
-		lblIncorrect.setBounds(77, 320, 165, 14);
+		lblIncorrect = new JLabel("Oops something went wrong");
+		lblIncorrect.setBounds(124, 321, 165, 14);
 		lblIncorrect.setFont(new Font("Calibri", Font.ITALIC, 11));
 		lblIncorrect.setForeground(Color.red);
 		lblIncorrect.setVisible(false);
@@ -62,19 +62,19 @@ public class LoginPanel extends JPanel // LoginPanel klasse der extender JPanel
 
 		// JTextField
 		userName_Login = new JTextField(); // Opret textfield
-		userName_Login.setBounds(86, 222, 143, 20); // Størrelse og placering
+		userName_Login.setBounds(127, 224, 143, 20); // Størrelse og placering
 		userName_Login.setColumns(10); // Størrelse
 		add(userName_Login); // Tilføj til panel
 		
 		//JPasswordField
 		password_Login = new JPasswordField(); // Opret passwordfield
-		password_Login.setBounds(86, 276, 143, 20); // Størrelse og placering
+		password_Login.setBounds(127, 278, 143, 20); // Størrelse og placering
 		password_Login.setColumns(10); // Størrelse
 		add(password_Login); // Tilføj til panel
 
 		//JButton
 		btnLogin = new JButton("Login"); // Lav knap og sæt tekst
-		btnLogin.setBounds(118, 446, 89, 23); // Størrelse og placering
+		btnLogin.setBounds(155, 425, 89, 23); // Størrelse og placering
 		add(btnLogin); // Tilføj til panel
 
 	} // Konstruktør slutter
