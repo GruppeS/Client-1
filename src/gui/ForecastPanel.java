@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.JPanel;
@@ -8,6 +9,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class ForecastPanel extends JPanel {
+	
+	private static final long serialVersionUID = 1L;
 	private JButton btnBackToMain;
 	private JScrollPane scrollPane;
 	private JTable table;
@@ -28,10 +31,14 @@ public class ForecastPanel extends JPanel {
 	
 	public void createTable(Vector<?> data) {
 		columnNames = new Vector<Object>();
-		columnNames.add("");
-		columnNames.add("");
-		columnNames.add("");
+		columnNames.add("Day");
+		columnNames.add("Temperature");
+		columnNames.add("Description");
 		table = new JTable(data, columnNames);
 		scrollPane.setViewportView(table);
+	}
+	public void addActionListener(ActionListener l) {
+		btnBackToMain.addActionListener(l);
+		btnBackToMain.setActionCommand("btnBackToMain");
 	}
 }

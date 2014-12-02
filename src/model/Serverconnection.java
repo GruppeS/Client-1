@@ -7,28 +7,39 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class ServerConnection {
+
 	private String serverReply; 
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 	private Socket clientSocket;
 
-	public String getFromServer(String gsonString) throws UnknownHostException, IOException, ClassNotFoundException{
-	
-		clientSocket = new Socket("localhost", 8888);
+	public void connect(){
 
-	input = new ObjectInputStream(clientSocket.getInputStream());
-	output = new ObjectOutputStream(clientSocket.getOutputStream());
-	
-	output.writeObject(gsonString);
-	output.flush();
-	serverReply = (String) input.readObject();
-	return serverReply; 
-	
+		try {
+			clientSocket = new Socket("localhost", 8888);
+
+			input = new ObjectInputStream(clientSocket.getInputStream());
+			output = new ObjectOutputStream(clientSocket.getOutputStream());
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public String getFromServer(String gsonString) throws UnknownHostException, IOException, ClassNotFoundException{
+
+		output.writeObject(gsonString);
+		output.flush();
+		serverReply = (String) input.readObject();
+		return serverReply; 
+
 	}
 	public void close() throws IOException{
 		clientSocket.close();
 	}
-	
 
-	
 }
