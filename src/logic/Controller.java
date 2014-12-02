@@ -71,7 +71,8 @@ public class Controller {
 		
 		 }
 		 else if (!info.equals("0")){
-			 screen.getLoginPanel().incorrect();
+			 screen.getLoginPanel().reset();
+			 screen.getLoginPanel().incorrect(); 
 		 }
 				
 			} 
@@ -88,7 +89,8 @@ public class Controller {
 					String qoute = null;
 					try {
 					qoute = serverConnection.getFromServer(gsonString);
-					System.out.println(qoute);
+					qOTD = gson.fromJson(qoute, QOTD.class);
+					screen.getMainPanel().setQoute(qOTD.getQuote());
 					}
 				 catch (UnknownHostException e1) {
 					// TODO Auto-generated catch block
