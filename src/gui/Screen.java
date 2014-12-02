@@ -68,6 +68,9 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 	public MainPanel getMainPanel(){ 
 		return mainPanel;
 	}
+	public ForecastPanel getForecastPanel(){
+		return forecastPanel;
+	}
 	/**
 	 * @param card
 	 */
