@@ -15,7 +15,7 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 	//final static strenge til at kalde de korresponderende paneler
 	public static final String MAINPANEL = "1";
 	public static final String LOGINPANEL = "2";
-	public static final String USERDEPOSIT = "3";
+	public static final String FORECASTPANEL = "3";
 	public static final String USERPANEL = "4";
 	public static final String USERPAY = "5";
 
@@ -23,6 +23,7 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 	private JPanel contentPane;
 	private LoginPanel loginPanel;
 	private MainPanel mainPanel;
+	private ForecastPanel forecastPanel;
 	
 	
 	CardLayout c; //variabel til at holde på cardlayout
@@ -32,7 +33,7 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 	 */
 	public Screen() // konstruktør
 	{
-		setTitle("Bitcoin@CBS"); // titel på vindue
+		setTitle("DoekCalendar"); // titel på vindue
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Programmet lukkes ned når vinduet lukkes
 		setBounds(100, 100, 336, 519); // størrelsen på vinduet
 		contentPane = new JPanel(); // der oprettes et tomt panel
@@ -47,6 +48,9 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 		
 		mainPanel = new MainPanel();
 		contentPane.add(mainPanel, MAINPANEL);
+		
+		forecastPanel = new ForecastPanel();
+		contentPane.add(forecastPanel, FORECASTPANEL);
 
 		c = (CardLayout) getContentPane().getLayout(); // cardlayoutet sættes til kunne bestå af de forskellige contentpanes
 	} // konstruktør slutter

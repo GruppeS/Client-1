@@ -7,7 +7,9 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
+import model.QOTD;
 import model.ServerConnection;
+import model.UserInfo;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
