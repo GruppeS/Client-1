@@ -16,7 +16,7 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 	public static final String MAINPANEL = "1";
 	public static final String LOGINPANEL = "2";
 	public static final String FORECASTPANEL = "3";
-	public static final String USERPANEL = "4";
+	public static final String CALENDARPANEL = "4";
 	public static final String USERPAY = "5";
 
 	// variable til at holde på objekter af JPanel
@@ -24,6 +24,7 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 	private LoginPanel loginPanel;
 	private MainPanel mainPanel;
 	private ForecastPanel forecastPanel;
+	private CalendarPanel calendarPanel;
 	
 	
 	CardLayout c; //variabel til at holde på cardlayout
@@ -51,6 +52,9 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 		
 		forecastPanel = new ForecastPanel();
 		contentPane.add(forecastPanel, FORECASTPANEL);
+		
+		calendarPanel = new CalendarPanel();
+		contentPane.add(calendarPanel, CALENDARPANEL);
 
 		c = (CardLayout) getContentPane().getLayout(); // cardlayoutet sættes til kunne bestå af de forskellige contentpanes
 	} // konstruktør slutter
@@ -62,7 +66,7 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 	 * @return loginPanel
 	 */
 	public LoginPanel getLoginPanel() {
-		return loginPanel; // returnerer loginPanel
+		return loginPanel; 
 	}
 	
 	public MainPanel getMainPanel(){ 
@@ -70,6 +74,10 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 	}
 	public ForecastPanel getForecastPanel(){
 		return forecastPanel;
+	}
+	
+	public CalendarPanel getCalendarPanel(){
+		return calendarPanel;
 	}
 	/**
 	 * @param card

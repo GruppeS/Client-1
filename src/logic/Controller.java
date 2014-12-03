@@ -161,6 +161,10 @@ public class Controller {
 				}
 				screen.show(screen.FORECASTPANEL);
 			}
+			
+			else if (cmd.equals("btnViewCalendar")){
+				screen.show(screen.CALENDARPANEL);
+			}
 
 		}
 	}
