@@ -16,8 +16,13 @@ import javax.swing.JTable;
 import javax.swing.JLabel;
 
 
-public class WeekPanel extends JPanel {
+public class WeekPanel extends JPanel{
 
+	
+	
+		private WeekPanel(){
+			
+		}
 
 	}
 	
