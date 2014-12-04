@@ -16,7 +16,7 @@ import javax.swing.JTable;
 import javax.swing.JLabel;
 
 
-public class CalendarPanel extends JPanel {
+public class WeekPanel extends JPanel {
 
 
 	}

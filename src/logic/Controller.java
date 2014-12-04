@@ -118,7 +118,7 @@ public class Controller {
 			}
 
 			else if (cmd.equals("btnLogout")){
-				
+
 				try {
 					screen.getMainPanel().reset();
 					screen.getLoginPanel().reset();
@@ -128,8 +128,8 @@ public class Controller {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				
+
+
 			}
 
 			else if(cmd.equals("btnWeather")) {
@@ -162,9 +162,9 @@ public class Controller {
 				}
 				screen.show(screen.FORECASTPANEL);
 			}
-			
+
 			else if (cmd.equals("btnViewCalendar")){
-				screen.show(screen.CALENDARPANEL);
+				screen.show(screen.WEEKPANEL);
 			}
 
 		}
@@ -181,22 +181,7 @@ public class Controller {
 
 		}
 	} 
-	
-	private class CalendarPanelActionListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e)
-		{
-			String cmd = e.getActionCommand();
-			
 
-			
-			if (cmd.equals("btnBack")) {
-				screen.show(screen.MAINPANEL);
-			}
-			
-		}
 
-		
-	}
 }
 
