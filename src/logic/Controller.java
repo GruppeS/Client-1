@@ -34,6 +34,7 @@ public class Controller {
 		screen.getLoginPanel().addActionListener(new LoginPanelActionListener());
 		screen.getMainPanel().addActionListener(new MainPanelActionListener());
 		screen.getForecastPanel().addActionListener(new ForecastPanelActionListener());
+		//screen.getCalendarPanel().addActionListener(new CalendarPanelActionListener());
 		serverConnection = new ServerConnection();
 		gson = new GsonBuilder().create();
 		userInfo = new UserInfo();
@@ -180,5 +181,22 @@ public class Controller {
 
 		}
 	} 
+	
+	private class CalendarPanelActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			String cmd = e.getActionCommand();
+			
+
+			
+			if (cmd.equals("btnBack")) {
+				screen.show(screen.MAINPANEL);
+			}
+			
+		}
+
+		
+	}
 }
 
