@@ -1,30 +1,23 @@
 package model;
 
-public class UserInfo implements java.io.Serializable
-{
-	private static final long serialVersionUID = 1L;
+public class UserInfo {
+
+	@SuppressWarnings("unused")
 	private String overallID = "logIn";
-	private String email;
+	private String username;
 	private String password;
 
-	//Getters and setters for everything
-	public String getOverallID() {
-		return overallID;
+	public String getUsername() {
+		return username;
 	}
-	public void setOverallID(String overallID) {
-		this.overallID = overallID;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public String getAuthUserEmail() {
-		return email;
-	}
-	public void setAuthUserEmail(String email) {
-		this.email = email;
-	}
-	public String getAuthUserPassword() {
+	public String getPassword() {
 		return password;
 	}
-	public void setAuthUserPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
-
 }
+

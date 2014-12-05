@@ -62,8 +62,8 @@ public class Controller {
 				serverConnection.connect();
 				email = screen.getLoginPanel().getUserName_Login(); 
 				password = screen.getLoginPanel().getPassword_Login();
-				userInfo.setAuthUserEmail(email);
-				userInfo.setAuthUserPassword(password);
+				userInfo.setUsername(email);
+				userInfo.setPassword(password);
 				String gsonString = gson.toJson(userInfo);
 				String info = null;
 				try {
