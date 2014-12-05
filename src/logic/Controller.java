@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Vector;
 
+import model.Calendar;
+import model.CalendarInfo;
+import model.Calendars;
+import model.Event;
+import model.Events;
 import model.Forecast;
 import model.Forecasts;
 import model.QOTD;
@@ -25,6 +30,11 @@ public class Controller {
 	private QOTD qOTD;
 	private Forecasts forecasts;
 	private Forecast forecast;
+	private Calendar calendar;
+	private Calendars calendars;
+	private CalendarInfo calendarInfo;
+	private Event event;
+	private Events events;
 	private Screen screen;
 	private ServerConnection serverConnection;
 
@@ -34,7 +44,12 @@ public class Controller {
 		screen.getLoginPanel().addActionListener(new LoginPanelActionListener());
 		screen.getMainPanel().addActionListener(new MainPanelActionListener());
 		screen.getForecastPanel().addActionListener(new ForecastPanelActionListener());
-		//screen.getCalendarPanel().addActionListener(new CalendarPanelActionListener());
+		screen.getWeekPanel().addActionListener(new WeekPanelActionListener());
+		calendar = new Calendar(null, null, false);
+		calendars = new Calendars();
+		calendarInfo = new CalendarInfo();
+		event = new Event(null, null, null, null, null, null, null);
+		events = new Events();
 		serverConnection = new ServerConnection();
 		gson = new GsonBuilder().create();
 		userInfo = new UserInfo();
@@ -164,6 +179,36 @@ public class Controller {
 			}
 
 			else if (cmd.equals("btnViewCalendar")){
+				String gsonString = gson.toJson(events);
+				String calendar = null;
+				try {
+					calendar = serverConnection.getFromServer(gsonString);
+					events = gson.fromJson(calendar, Events.class);
+
+					Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+
+					for(int i = 0; i<7; i++) {
+						Vector<Object> row = new Vector<Object>();
+						row.addElement(events.getEvents().get(i).getEventid());
+						row.addElement(events.getEvents().get(i).getType());
+						row.addElement(events.getEvents().get(i).getDescription());
+						row.addElement(events.getEvents().get(i).getStart());
+						row.addElement(events.getEvents().get(i).getEnd());
+						row.addElement(events.getEvents().get(i).getLocation());
+						data.addElement(row);
+					}
+					screen.getWeekPanel().createTable(data);
+
+				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				screen.show(screen.WEEKPANEL);
 			}
 
@@ -181,6 +226,16 @@ public class Controller {
 
 		}
 	} 
+	private class WeekPanelActionListener implements ActionListener{
+		public void actionPerformed(ActionEvent e)
+		{
+			String cmd = e.getActionCommand();
+
+			if (cmd.equals("btnBack")) {
+				screen.show(screen.MAINPANEL);
+			}
+		}
+	}
 
 
 }

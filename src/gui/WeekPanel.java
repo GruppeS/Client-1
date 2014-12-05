@@ -55,7 +55,7 @@ public class WeekPanel extends JPanel{
 	}
 	public void addActionListener(ActionListener l) {
 		btnBack.addActionListener(l);
-		btnBack.setActionCommand("btnBackToMain");
+		btnBack.setActionCommand("btnBack");
 }
 
 }

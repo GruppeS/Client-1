@@ -76,7 +76,7 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 		return forecastPanel;
 	}
 	
-	public WeekPanel getCalendarPanel(){
+	public WeekPanel getWeekPanel(){
 		return weekPanel;
 	}
 	/**
