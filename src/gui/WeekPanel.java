@@ -1,19 +1,13 @@
 package gui;
 
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.table.*;
+import java.awt.event.ActionListener;
+import java.util.Vector;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.BevelBorder;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class WeekPanel extends JPanel{
 	

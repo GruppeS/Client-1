@@ -58,6 +58,10 @@ public class Screen extends JFrame // Screen klasse der extender JFrame
 
 		c = (CardLayout) getContentPane().getLayout(); // cardlayoutet sættes til kunne bestå af de forskellige contentpanes
 	} // konstruktør slutter
+	
+	public void setSize(int h, int w){
+		setBounds(0,0, h, w);
+	}
 
 	
 	// getters og setters til paneler
