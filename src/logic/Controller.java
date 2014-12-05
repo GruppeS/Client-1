@@ -179,6 +179,7 @@ public class Controller {
 			}
 
 			else if (cmd.equals("btnViewCalendar")){
+				screen.setSize(880,500);
 				String gsonString = gson.toJson(events);
 				String calendar = null;
 				try {
@@ -187,7 +188,7 @@ public class Controller {
 
 					Vector<Vector<Object>> data = new Vector<Vector<Object>>();
 
-					for(int i = 0; i<7; i++) {
+					for(int i = 0; i<25; i++) {
 						Vector<Object> row = new Vector<Object>();
 						row.addElement(events.getEvents().get(i).getEventid());
 						row.addElement(events.getEvents().get(i).getType());

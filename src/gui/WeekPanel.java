@@ -23,15 +23,15 @@ public class WeekPanel extends JPanel{
 		setLayout(null);
 		
 		btnBack = new JButton("Back to main");
-		btnBack.setBounds(431, 371, 79, 26);
+		btnBack.setBounds(706, 390, 145, 26);
 		add(btnBack);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(60, 60, 450, 300);
+		scrollPane.setBounds(10, 60, 841, 300);
 		add(scrollPane);
 		
 		lblCalendar = new JLabel("Calendar");
-		lblCalendar.setBounds(258, 11, 65, 43);
+		lblCalendar.setBounds(10, 6, 172, 43);
 		add(lblCalendar);
 
 	}
