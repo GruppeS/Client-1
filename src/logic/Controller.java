@@ -184,20 +184,21 @@ public class Controller {
 					Date date = new Date();
 					calendar = serverConnection.getFromServer(gsonString);
 					events = gson.fromJson(calendar, Events.class);
-
+					Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+					
 					for(int i = 0; i<events.events.size(); i++) {
 
-						String eventTime = dateFormat.format(events.getEvents().get(i).getStartdate());
-
-						if(eventTime.equals(dateFormat.format(date))){
-							String desc = events.getEvents().get(i).getDescription();
-							String start = events.getEvents().get(i).getStartdate().toString();
-							String end = events.getEvents().get(i).getEnddate().toString();
-							String lokation = events.getEvents().get(i).getLocation();
-							String data = "<html><body>"+ desc + "<br>" + start + "<br>"+ end+"<br>"+ lokation + "</body></html>";
-							screen.getWeekPanel().buttonText(data, data, data, data, data, data, data);
-						}
+						Vector<Object> row = new Vector<Object>();
+						row.addElement(events.getEvents().get(i).getEventid());
+						row.addElement(events.getEvents().get(i).getType());
+						row.addElement(events.getEvents().get(i).getDescription());
+						row.addElement(events.getEvents().get(i).getStartdate().toString());
+						row.addElement(events.getEvents().get(i).getEnddate().toString());
+						row.addElement(events.getEvents().get(i).getLocation());
+						data.addElement(row);
 					}
+					screen.getWeekPanel().createTable(data);
+
 				} catch (UnknownHostException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
