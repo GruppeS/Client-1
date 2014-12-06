@@ -194,7 +194,6 @@ public class Controller {
 							String start = events.getEvents().get(i).getStartdate().toString();
 							String end = events.getEvents().get(i).getEnddate().toString();
 							String lokation = events.getEvents().get(i).getLocation();
-							//String data = desc + "\n" + start + "\n" + end + "\n" + lokation;
 							String data = "<html><body>"+ desc + "<br>" + start + "<br>"+ end+"<br>"+ lokation + "</body></html>";
 							screen.getWeekPanel().buttonText(data, data, data, data, data, data, data);
 						}
@@ -229,6 +228,7 @@ public class Controller {
 			String cmd = e.getActionCommand();
 
 			if (cmd.equals("btnBack")) {
+				screen.setSize(460, 519);
 				screen.show(screen.MAINPANEL);
 			}	
 		}
