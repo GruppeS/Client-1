@@ -10,8 +10,6 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JTextArea;
 
-import com.sun.glass.events.MouseEvent;
-
 public class MainPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
@@ -64,10 +62,6 @@ public class MainPanel extends JPanel {
 		btnLogout.setActionCommand("btnLogout"); // tilføjer actioncommand
 		
 	} // metode slutter
-	
-	public void addMouseListener(MouseAdapter l){
-		lblMainMenu.addMouseListener(l);
-	}
 	
 	public void setQoute(String qoute){
 		textArea.setText(qoute);

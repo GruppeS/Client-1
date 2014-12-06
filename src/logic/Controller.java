@@ -2,17 +2,15 @@ package logic;
 
 import gui.Screen;
 
-import java.awt.Component;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Vector;
-
-import javax.swing.JLabel;
 
 import model.Calendar;
 import model.CalendarInfo;
@@ -29,6 +27,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class Controller {
+	private int START_WEEK;
+	private int START_YEAR;
 	private String email;
 	private String password;
 	private Gson gson;
@@ -36,13 +36,13 @@ public class Controller {
 	private QOTD qOTD;
 	private Forecasts forecasts;
 	private Forecast forecast;
-	private Calendar calendar;
 	private Calendars calendars;
 	private CalendarInfo calendarInfo;
 	private Event event;
 	private Events events;
 	private Screen screen;
 	private ServerConnection serverConnection;
+	private java.util.Calendar cal;
 
 	public Controller() {
 
@@ -51,10 +51,9 @@ public class Controller {
 		screen.getMainPanel().addActionListener(new MainPanelActionListener());
 		screen.getForecastPanel().addActionListener(new ForecastPanelActionListener());
 		screen.getWeekPanel().addActionListener(new WeekPanelActionListener());
-		screen.getMainPanel().addMouseListener(new MainPanelMouseListener());
-		calendar = new Calendar(null, null, false);
 		calendars = new Calendars();
 		calendarInfo = new CalendarInfo();
+		cal = new GregorianCalendar();
 		event = new Event(null, null, null, null, null, null, null);
 		events = new Events();
 		serverConnection = new ServerConnection();
@@ -180,23 +179,26 @@ public class Controller {
 				String gsonString = gson.toJson(events);
 				String calendar = null;
 				try {
+					cal = java.util.Calendar.getInstance();
+					DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+					Date date = new Date();
 					calendar = serverConnection.getFromServer(gsonString);
 					events = gson.fromJson(calendar, Events.class);
 
-					Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+					for(int i = 0; i<events.events.size(); i++) {
 
-					for(int i = 0; i<25; i++) {
-						Vector<Object> row = new Vector<Object>();
-						row.addElement(events.getEvents().get(i).getEventid());
-						row.addElement(events.getEvents().get(i).getType());
-						row.addElement(events.getEvents().get(i).getDescription());
-						row.addElement(events.getEvents().get(i).getStart());
-						row.addElement(events.getEvents().get(i).getEnd());
-						row.addElement(events.getEvents().get(i).getLocation());
-						data.addElement(row);
+						String eventTime = dateFormat.format(events.getEvents().get(i).getStartdate());
+
+						if(eventTime.equals(dateFormat.format(date))){
+							String desc = events.getEvents().get(i).getDescription();
+							String start = events.getEvents().get(i).getStartdate().toString();
+							String end = events.getEvents().get(i).getEnddate().toString();
+							String lokation = events.getEvents().get(i).getLocation();
+							//String data = desc + "\n" + start + "\n" + end + "\n" + lokation;
+							String data = "<html><body>"+ desc + "<br>" + start + "<br>"+ end+"<br>"+ lokation + "</body></html>";
+							screen.getWeekPanel().buttonText(data, data, data, data, data, data, data);
+						}
 					}
-					screen.getWeekPanel().createTable(data);
-
 				} catch (UnknownHostException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
@@ -230,35 +232,11 @@ public class Controller {
 				screen.show(screen.MAINPANEL);
 			}	
 		}
-		
-	}
-	
-	private class MainPanelMouseListener implements MouseListener{
-		
-		public void mouseClicked(MouseEvent e){
-			
-			 JLabel mcmd = (JLabel) e.getComponent();
-			
-			if (mcmd.equals(screen.getMainPanel().getLblMainMenu())){
-				System.out.println("test");
-			}
 
-			}
-		public void mouseEntered(MouseEvent e) {
-			
-		}
-		public void mouseExited(MouseEvent e) {
-			
-		}
-		public void mousePressed(MouseEvent e) {
-			
-		}
-		public void mouseReleased(MouseEvent e) {
-			
-		}
-			
-		}
-		
 	}
+
+
+
+}
 
 
