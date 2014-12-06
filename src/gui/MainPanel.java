@@ -3,8 +3,14 @@ package gui;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
+
 import javax.swing.JTextArea;
+
+import com.sun.glass.events.MouseEvent;
 
 public class MainPanel extends JPanel {
 	
@@ -59,6 +65,10 @@ public class MainPanel extends JPanel {
 		
 	} // metode slutter
 	
+	public void addMouseListener(MouseAdapter l){
+		lblMainMenu.addMouseListener(l);
+	}
+	
 	public void setQoute(String qoute){
 		textArea.setText(qoute);
 	}
@@ -66,4 +76,8 @@ public class MainPanel extends JPanel {
 	public void reset(){
 		textArea.setText("");
 	}
+	public JLabel getLblMainMenu() {
+		return lblMainMenu;
+	}
+
 }

@@ -2,11 +2,17 @@ package logic;
 
 import gui.Screen;
 
+import java.awt.Component;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Vector;
+
+import javax.swing.JLabel;
 
 import model.Calendar;
 import model.CalendarInfo;
@@ -45,6 +51,7 @@ public class Controller {
 		screen.getMainPanel().addActionListener(new MainPanelActionListener());
 		screen.getForecastPanel().addActionListener(new ForecastPanelActionListener());
 		screen.getWeekPanel().addActionListener(new WeekPanelActionListener());
+		screen.getMainPanel().addMouseListener(new MainPanelMouseListener());
 		calendar = new Calendar(null, null, false);
 		calendars = new Calendars();
 		calendarInfo = new CalendarInfo();
@@ -84,13 +91,10 @@ public class Controller {
 				try {
 					info = serverConnection.getFromServer(gsonString);
 				} catch (UnknownHostException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				if(info.equals("0")){
@@ -120,13 +124,10 @@ public class Controller {
 					screen.getMainPanel().setQoute(qOTD.getQuote());
 				}
 				catch (UnknownHostException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -140,7 +141,6 @@ public class Controller {
 					serverConnection.close();
 					screen.show(screen.LOGINPANEL);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -166,13 +166,10 @@ public class Controller {
 					screen.getForecastPanel().createTable(data);
 
 				} catch (UnknownHostException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				screen.show(screen.FORECASTPANEL);
@@ -201,13 +198,10 @@ public class Controller {
 					screen.getWeekPanel().createTable(data);
 
 				} catch (UnknownHostException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				screen.show(screen.WEEKPANEL);
@@ -234,10 +228,37 @@ public class Controller {
 
 			if (cmd.equals("btnBack")) {
 				screen.show(screen.MAINPANEL);
-			}
+			}	
 		}
+		
+	}
+	
+	private class MainPanelMouseListener implements MouseListener{
+		
+		public void mouseClicked(MouseEvent e){
+			
+			 JLabel mcmd = (JLabel) e.getComponent();
+			
+			if (mcmd.equals(screen.getMainPanel().getLblMainMenu())){
+				System.out.println("test");
+			}
+
+			}
+		public void mouseEntered(MouseEvent e) {
+			
+		}
+		public void mouseExited(MouseEvent e) {
+			
+		}
+		public void mousePressed(MouseEvent e) {
+			
+		}
+		public void mouseReleased(MouseEvent e) {
+			
+		}
+			
+		}
+		
 	}
 
-
-}
 
