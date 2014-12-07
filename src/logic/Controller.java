@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Vector;
 
-import model.Calendar;
 import model.CalendarInfo;
 import model.Calendars;
 import model.Event;
@@ -27,22 +26,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class Controller {
-	private int START_WEEK;
-	private int START_YEAR;
 	private String email;
 	private String password;
 	private Gson gson;
 	private UserInfo userInfo;
 	private QOTD qOTD;
 	private Forecasts forecasts;
-	private Forecast forecast;
-	private Calendars calendars;
-	private CalendarInfo calendarInfo;
-	private Event event;
 	private Events events;
 	private Screen screen;
 	private ServerConnection serverConnection;
-	private java.util.Calendar cal;
 
 	public Controller() {
 
@@ -51,18 +43,12 @@ public class Controller {
 		screen.getMainPanel().addActionListener(new MainPanelActionListener());
 		screen.getForecastPanel().addActionListener(new ForecastPanelActionListener());
 		screen.getWeekPanel().addActionListener(new WeekPanelActionListener());
-		calendars = new Calendars();
-		calendarInfo = new CalendarInfo();
-		cal = new GregorianCalendar();
-		event = new Event(null, null, null, null, null, null, null);
 		events = new Events();
 		serverConnection = new ServerConnection();
 		gson = new GsonBuilder().create();
 		userInfo = new UserInfo();
 		qOTD = new QOTD();
 		forecasts = new Forecasts();
-		forecast = new Forecast(null, null, null);
-
 	}
 
 	public void run(){
@@ -89,6 +75,8 @@ public class Controller {
 				String info = null;
 				try {
 					info = serverConnection.getFromServer(gsonString);
+					userInfo = gson.fromJson(info, UserInfo.class);
+					info = userInfo.getAuthenticated();
 				} catch (UnknownHostException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
@@ -157,9 +145,9 @@ public class Controller {
 
 					for(int i = 0; i<7; i++) {
 						Vector<Object> row = new Vector<Object>();
-						row.addElement(forecasts.getForecasts().get(i).getDate().substring(0,10));
-						row.addElement(forecasts.getForecasts().get(i).getCelsius());
-						row.addElement(forecasts.getForecasts().get(i).getDesc());
+						row.addElement(forecasts.forecasts.get(i).getDate().substring(0,10));
+						row.addElement(forecasts.forecasts.get(i).getCelsius());
+						row.addElement(forecasts.forecasts.get(i).getDesc());
 						data.addElement(row);
 					}
 					screen.getForecastPanel().createTable(data);
@@ -179,9 +167,6 @@ public class Controller {
 				String gsonString = gson.toJson(events);
 				String calendar = null;
 				try {
-					cal = java.util.Calendar.getInstance();
-					DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-					Date date = new Date();
 					calendar = serverConnection.getFromServer(gsonString);
 					events = gson.fromJson(calendar, Events.class);
 					Vector<Vector<Object>> data = new Vector<Vector<Object>>();
