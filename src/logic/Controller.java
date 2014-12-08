@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Vector;
 
-import model.CalendarInfo;
 import model.Calendars;
 import model.Event;
 import model.Events;
@@ -42,7 +41,7 @@ public class Controller {
 		screen.getLoginPanel().addActionListener(new LoginPanelActionListener());
 		screen.getMainPanel().addActionListener(new MainPanelActionListener());
 		screen.getForecastPanel().addActionListener(new ForecastPanelActionListener());
-		screen.getWeekPanel().addActionListener(new WeekPanelActionListener());
+		screen.getCalendarPanel().addActionListener(new WeekPanelActionListener());
 		events = new Events();
 		serverConnection = new ServerConnection();
 		gson = new GsonBuilder().create();
@@ -174,15 +173,15 @@ public class Controller {
 					for(int i = 0; i<events.events.size(); i++) {
 
 						Vector<Object> row = new Vector<Object>();
-						row.addElement(events.getEvents().get(i).getEventid());
-						row.addElement(events.getEvents().get(i).getType());
-						row.addElement(events.getEvents().get(i).getDescription());
-						row.addElement(events.getEvents().get(i).getStartdate().toString());
-						row.addElement(events.getEvents().get(i).getEnddate().toString());
-						row.addElement(events.getEvents().get(i).getLocation());
+						row.addElement(events.events.get(i).getEventid());
+						row.addElement(events.events.get(i).getType());
+						row.addElement(events.events.get(i).getDescription());
+						row.addElement(events.events.get(i).getStartdate().toString());
+						row.addElement(events.events.get(i).getEnddate().toString());
+						row.addElement(events.events.get(i).getLocation());
 						data.addElement(row);
 					}
-					screen.getWeekPanel().createTable(data);
+					screen.getCalendarPanel().setEvents(data);
 
 				} catch (UnknownHostException e1) {
 					e1.printStackTrace();
@@ -191,7 +190,7 @@ public class Controller {
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				}
-				screen.show(screen.WEEKPANEL);
+				screen.show(screen.CALENDARPANEL);
 			}
 
 		}

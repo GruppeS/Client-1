@@ -1,15 +1,12 @@
 package model;
 import java.io.Serializable;
 
-public class QOTD implements Serializable {
+public class QOTD {
 
-	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unused")
 	private String overallID = "getQuote";
 	private String quote;
 
-	public String getOverallID() {
-		return overallID;
-	}
 	public String getQuote() {
 		return quote;
 	}
