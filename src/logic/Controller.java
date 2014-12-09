@@ -41,7 +41,7 @@ public class Controller {
 		screen.getLoginPanel().addActionListener(new LoginPanelActionListener());
 		screen.getMainPanel().addActionListener(new MainPanelActionListener());
 		screen.getForecastPanel().addActionListener(new ForecastPanelActionListener());
-		screen.getCalendarPanel().addActionListener(new WeekPanelActionListener());
+		screen.getCalendarPanel().addActionListener(new CalendarPanelActionListener());
 		events = new Events();
 		serverConnection = new ServerConnection();
 		gson = new GsonBuilder().create();
@@ -179,6 +179,7 @@ public class Controller {
 						row.addElement(events.events.get(i).getStartdate().toString());
 						row.addElement(events.events.get(i).getEnddate().toString());
 						row.addElement(events.events.get(i).getLocation());
+						row.addElement(events.events.get(i).getNote());
 						data.addElement(row);
 					}
 					screen.getCalendarPanel().setEvents(data);
@@ -207,11 +208,15 @@ public class Controller {
 
 		}
 	} 
-	private class WeekPanelActionListener implements ActionListener{
+	private class CalendarPanelActionListener implements ActionListener{
 		public void actionPerformed(ActionEvent e)
 		{
 			String cmd = e.getActionCommand();
-
+			
+			if(cmd.equals("btnCalendars"))
+			{
+				
+			}
 			if (cmd.equals("btnBack")) {
 				screen.setSize(460, 519);
 				screen.show(screen.MAINPANEL);

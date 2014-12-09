@@ -8,10 +8,11 @@ import java.net.UnknownHostException;
 
 public class ServerConnection {
 
-	private String serverReply; 
+	private byte[] serverReply; 
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 	private Socket clientSocket;
+	private Encryption encryption = new Encryption();
 
 	public void connect(){
 
@@ -21,10 +22,10 @@ public class ServerConnection {
 			input = new ObjectInputStream(clientSocket.getInputStream());
 			output = new ObjectOutputStream(clientSocket.getOutputStream());
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -32,10 +33,11 @@ public class ServerConnection {
 
 	public String getFromServer(String gsonString) throws UnknownHostException, IOException, ClassNotFoundException{
 
-		output.writeObject(gsonString);
+		output.writeObject(encryption.encrypt(gsonString));
 		output.flush();
-		serverReply = (String) input.readObject();
-		return serverReply; 
+		serverReply = (byte[]) input.readObject();
+		String reply = encryption.decrypt(serverReply);
+		return reply; 
 
 	}
 	public void close() throws IOException{
