@@ -34,6 +34,7 @@ public class Controller {
 	private Events events;
 	private Screen screen;
 	private ServerConnection serverConnection;
+	private Calendars calendars;
 
 	public Controller() {
 
@@ -42,12 +43,14 @@ public class Controller {
 		screen.getMainPanel().addActionListener(new MainPanelActionListener());
 		screen.getForecastPanel().addActionListener(new ForecastPanelActionListener());
 		screen.getCalendarPanel().addActionListener(new CalendarPanelActionListener());
+		screen.getCalendarListPanel().addActionListener(new CalendarListPanelActionListener());
 		events = new Events();
 		serverConnection = new ServerConnection();
 		gson = new GsonBuilder().create();
 		userInfo = new UserInfo();
 		qOTD = new QOTD();
 		forecasts = new Forecasts();
+		calendars = new Calendars();
 	}
 
 	public void run(){
@@ -55,6 +58,37 @@ public class Controller {
 		screen.show(Screen.LOGINPANEL);
 		screen.setVisible(true);
 
+	}
+	
+	public void resetCalendars(){
+		String gsonString = gson.toJson(events);
+		String calendar = null;
+		try {
+		calendar = serverConnection.getFromServer(gsonString);
+		events = gson.fromJson(calendar, Events.class);
+		Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+
+		for(int i = 0; i<events.events.size(); i++) {
+
+			Vector<Object> row = new Vector<Object>();
+			row.addElement(events.events.get(i).getEventid());
+			row.addElement(events.events.get(i).getType());
+			row.addElement(events.events.get(i).getDescription());
+			row.addElement(events.events.get(i).getStartdate().toString());
+			row.addElement(events.events.get(i).getEnddate().toString());
+			row.addElement(events.events.get(i).getLocation());
+			row.addElement(events.events.get(i).getNote());
+			data.addElement(row);
+		}
+		screen.getCalendarPanel().setEvents(data);
+		} catch (UnknownHostException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		
 	}
 
 	private class LoginPanelActionListener implements ActionListener // Klasse der implementere actionlistener
@@ -163,34 +197,7 @@ public class Controller {
 
 			else if (cmd.equals("btnViewCalendar")){
 				screen.setSize(880,500);
-				String gsonString = gson.toJson(events);
-				String calendar = null;
-				try {
-					calendar = serverConnection.getFromServer(gsonString);
-					events = gson.fromJson(calendar, Events.class);
-					Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-					
-					for(int i = 0; i<events.events.size(); i++) {
-
-						Vector<Object> row = new Vector<Object>();
-						row.addElement(events.events.get(i).getEventid());
-						row.addElement(events.events.get(i).getType());
-						row.addElement(events.events.get(i).getDescription());
-						row.addElement(events.events.get(i).getStartdate().toString());
-						row.addElement(events.events.get(i).getEnddate().toString());
-						row.addElement(events.events.get(i).getLocation());
-						row.addElement(events.events.get(i).getNote());
-						data.addElement(row);
-					}
-					screen.getCalendarPanel().setEvents(data);
-
-				} catch (UnknownHostException e1) {
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				}
+				resetCalendars();
 				screen.show(screen.CALENDARPANEL);
 			}
 
@@ -209,12 +216,65 @@ public class Controller {
 		}
 	} 
 	private class CalendarPanelActionListener implements ActionListener{
-		public void actionPerformed(ActionEvent e)
+		public void actionPerformed(ActionEvent e) 
 		{
 			String cmd = e.getActionCommand();
-			
+
 			if(cmd.equals("btnCalendars"))
 			{
+				String gsonString = gson.toJson(calendars);
+				String calendarInfo = null;
+
+				try{
+					calendarInfo = serverConnection.getFromServer(gsonString);
+					calendars = gson.fromJson(calendarInfo, Calendars.class);
+					Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+
+					for(int i = 0; i<calendars.calendars.size(); i++) {
+						Vector<Object> row = new Vector<Object>();
+						row.addElement(calendars.calendars.get(i).getCalendarname());
+						row.addElement(calendars.calendars.get(i).getUsername());
+						data.addElement(row);
+					}
+					screen.getCalendarListPanel().setCalendars(data);
+				} catch (UnknownHostException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				}
+				screen.show(screen.CALENDARLISTPANEL);
+			}
+			
+			if (cmd.equals("btnAddNote")){
+				
+				String note = screen.getCalendarPanel().getNote();
+				String eventID = screen.getCalendarPanel().getSelectedEvent();
+				Event event = new Event(null, eventID, null, null, null, null, null);
+				event.setNote(note);
+				event.setOverallID("createNote");
+				String gsonString = gson.toJson(event);
+				try {
+					serverConnection.getFromServer(gsonString);
+					resetCalendars();
+				} catch (ClassNotFoundException
+						| IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+			if (cmd.equals("btnDeleteNote")){
+				String eventID = screen.getCalendarPanel().getSelectedEvent();
+				Event event = new Event(null, eventID, null, null, null, null, null);
+				event.setOverallID("deleteNote");
+				String gsonString = gson.toJson(event);
+				try {
+					serverConnection.getFromServer(gsonString);
+					resetCalendars();
+				} catch (ClassNotFoundException
+						| IOException e1) {
+					e1.printStackTrace();
+				}
 				
 			}
 			if (cmd.equals("btnBack")) {
@@ -224,8 +284,15 @@ public class Controller {
 		}
 
 	}
+	
+	private class CalendarListPanelActionListener implements ActionListener{
 
-
+		public void actionPerformed(ActionEvent e) {
+			String cmd = e.getActionCommand();
+			
+		}
+		
+	}
 
 }
 
