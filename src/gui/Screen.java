@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import gui.CalendarListPanel;
-import gui.EventListPanel;
 
 public class Screen extends JFrame 
 {
@@ -17,9 +16,8 @@ public class Screen extends JFrame
 	public static final String LOGINPANEL = "2";
 	public static final String FORECASTPANEL = "3";
 	public static final String CALENDARPANEL = "4";
-	public static final String DAYPANEL = "5";
-	public static final String CALENDARLISTPANEL = "6";
-	public static final String EVENTLISTPANEL = "7";
+	public static final String CALENDARLISTPANEL = "5";
+
 
 	private JPanel contentPane;
 	private LoginPanel loginPanel;
@@ -27,12 +25,9 @@ public class Screen extends JFrame
 	private ForecastPanel forecastPanel;
 	private CalendarPanel calendarPanel;
 	private CalendarListPanel calendarListPanel;
-	private EventListPanel eventListPanel;
 
 	CardLayout c; 
-	/**
-	 * Constructer that holds the frame and an object for every panel
-	 */
+	
 	public Screen() 
 	{
 		setTitle("DoekCalendar"); 
@@ -57,9 +52,6 @@ public class Screen extends JFrame
 		
 		calendarListPanel = new CalendarListPanel();
 		contentPane.add(calendarListPanel, CALENDARLISTPANEL);
-		
-		eventListPanel = new EventListPanel();
-		contentPane.add(eventListPanel, EVENTLISTPANEL);
 
 		c = (CardLayout) getContentPane().getLayout(); 
 	}
@@ -85,10 +77,6 @@ public class Screen extends JFrame
 	
 	public CalendarListPanel getCalendarListPanel() {
 		return calendarListPanel;
-	}
-	
-	public EventListPanel getEventListPanel() {
-		return eventListPanel;
 	}
 
 	public void show(String card) 

@@ -18,7 +18,6 @@ public class LoginPanel extends JPanel // LoginPanel klasse der extender JPanel
 	private JLabel lblPleaseLoginBelow;
 	private JLabel lblUsername;
 	private JLabel lblPassword;
-	private JLabel lblBackground;
 	private JLabel lblIncorrect;
 	private JTextField userName_Login;
 	private JPasswordField password_Login;

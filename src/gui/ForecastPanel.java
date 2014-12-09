@@ -26,11 +26,11 @@ public class ForecastPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnBackToMain.setBounds(10, 266, 124, 23);
+		btnBackToMain.setBounds(10, 429, 124, 23);
 		add(btnBackToMain);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 430, 177);
+		scrollPane.setBounds(10, 11, 430, 237);
 		add(scrollPane);
 	}
 	

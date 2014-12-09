@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
@@ -27,7 +26,6 @@ public class CalendarListPanel extends JPanel {
 	private JTextField textCalendar;
 	private JLabel lblCalendars;
 	private JButton btnShare;
-	private JButton btnCalendarEvents;
 	private JScrollPane scrollPane;
 	private JTable table;
 
@@ -37,40 +35,40 @@ public class CalendarListPanel extends JPanel {
 		setLayout(null);
 
 		btnBack = new JButton("Back to Main Menu");
-		btnBack.setBounds(112, 350, 150, 23);
+		btnBack.setBounds(200, 332, 150, 23);
 		add(btnBack);
 		
 		btnDelete = new JButton("Delete");
-		btnDelete.setBounds(30, 184, 104, 23);
+		btnDelete.setBounds(30, 332, 104, 23);
 		add(btnDelete);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(30, 33, 209, 138);
+		scrollPane.setBounds(30, 33, 320, 288);
 		add(scrollPane);
 		
 		textCalendar = new JTextField();
-		textCalendar.setBounds(30, 262, 104, 20);
+		textCalendar.setBounds(376, 206, 104, 20);
 		add(textCalendar);
 		textCalendar.setColumns(10);
 		
 		isPublic = new JCheckBox("Public");
-		isPublic.setBounds(145, 261, 97, 23);
+		isPublic.setBounds(376, 233, 97, 23);
 		add(isPublic);
 		
 		lblCalendarName = new JLabel("Calendar name:");
-		lblCalendarName.setBounds(30, 240, 133, 14);
+		lblCalendarName.setBounds(376, 184, 133, 14);
 		add(lblCalendarName);
 		
 		btnCreate = new JButton("Create calendar");
-		btnCreate.setBounds(30, 301, 133, 23);
+		btnCreate.setBounds(376, 263, 133, 23);
 		add(btnCreate);
 		
 		lblShareWith = new JLabel("Share with:");
-		lblShareWith.setBounds(243, 240, 122, 14);
+		lblShareWith.setBounds(375, 33, 122, 14);
 		add(lblShareWith);
 		
 		textShare = new JTextField();
-		textShare.setBounds(243, 262, 122, 20);
+		textShare.setBounds(375, 71, 122, 20);
 		add(textShare);
 		textShare.setColumns(10);
 		
@@ -79,13 +77,8 @@ public class CalendarListPanel extends JPanel {
 		add(lblCalendars);
 		
 		btnShare = new JButton("Share");
-		btnShare.setBounds(243, 301, 97, 23);
+		btnShare.setBounds(375, 108, 97, 23);
 		add(btnShare);
-		
-		btnCalendarEvents = new JButton("Calendar events");
-		btnCalendarEvents.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnCalendarEvents.setBounds(249, 75, 116, 54);
-		add(btnCalendarEvents);
 	}
 
 	public void setCalendars(Vector<?> data) {
@@ -124,8 +117,6 @@ public class CalendarListPanel extends JPanel {
 	
 	public void addActionListener(ActionListener l)
 	{
-		btnCalendarEvents.addActionListener(l);
-		btnCalendarEvents.setActionCommand("btnEvents");
 		btnBack.addActionListener(l);
 		btnBack.setActionCommand("btnBack");
 		btnDelete.addActionListener(l);
